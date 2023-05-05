@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+bool solution(int x,int y,int z){
+    if(x+y<z){
+        return false;
+    }
+    else{
+        vector<int> dir={x,-x,y,-y};
+        set<int> vis;
+        queue<int> q;
+        
+        q.push(0);
+        vis.insert(0);
+        
+        while(!q.empty()){
+            int curr=q.front();
+            q.pop();
+            
+            for(int di:dir){
+                int result= curr+di;
+                
+                if(result==z) return true;
+                if(result<0 || result>z) continue;
+                if(vis.find(result) == vis.end()){
+                    q.push(result);
+                    vis.insert(result);
+                }
+            }
+        }
+    }
+    return false;
+}
+int main(){
+    int j1=3,j2=2,r=4;
+    
+    cout<<solution(j1,j2,r);
+    
+    return 0;
+}
